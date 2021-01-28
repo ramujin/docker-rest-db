@@ -60,7 +60,6 @@ def get_student(req):
 
   return response
 
-
 ''' Route Configurations '''
 if __name__ == '__main__':
   with Configurator() as config:
