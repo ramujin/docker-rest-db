@@ -22,7 +22,6 @@ def get_students(req):
   # Format the result as key-value pairs
   response = {}
   for index, row in enumerate(records):
-    print(row)
     response[index] = {
       "id": row[0],
       "first_name": row[1],
