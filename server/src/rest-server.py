@@ -18,6 +18,7 @@ def get_students(req):
   cursor = db.cursor()
   cursor.execute("select id, first_name, last_name, email, age from TestUsers;")
   records = cursor.fetchall()
+  db.close()
 
   # Format the result as key-value pairs
   response = {}
