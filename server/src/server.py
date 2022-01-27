@@ -1,6 +1,7 @@
 from wsgiref.simple_server import make_server
 from pyramid.config import Configurator
 from pyramid.response import Response
+from pyramid.renderers import render_to_response
 
 import mysql.connector as mysql
 import os
@@ -11,12 +12,24 @@ db_user = os.environ['MYSQL_USER']
 db_pass = os.environ['MYSQL_PASSWORD']
 db_name = os.environ['MYSQL_DATABASE']
 
-''' Collection Route to GET Students '''
-def get_students(req):
-  # Connect to the database and retrieve the students
+
+''' Normal Route for an HTML Page '''
+def get_home(req):
   db = mysql.connect(host=db_host, database=db_name, user=db_user, passwd=db_pass)
   cursor = db.cursor()
-  cursor.execute("select id, first_name, last_name, email, age from TestUsers;")
+  cursor.execute("select id, first_name, last_name, email, age from Actors;")
+  records = cursor.fetchall()
+  db.close()
+
+  return render_to_response('index.html', {"actors":records}, request=req)
+
+
+''' Collection Route to GET Actors '''
+def get_actors(req):
+  # Connect to the database and retrieve the actors
+  db = mysql.connect(host=db_host, database=db_name, user=db_user, passwd=db_pass)
+  cursor = db.cursor()
+  cursor.execute("select id, first_name, last_name, email, age from Actors;")
   records = cursor.fetchall()
   db.close()
 
@@ -33,15 +46,16 @@ def get_students(req):
 
   return response
 
-''' Instance Route to GET Student '''
-def get_student(req):
-  # Retrieve the route argument (this is not GET/POST data!)
-  the_id = req.matchdict['student_id']
 
-  # Connect to the database and retrieve the student
+''' Instance Route to GET Actor '''
+def get_actor(req):
+  # Retrieve the route argument (this is not GET/POST data!)
+  the_id = req.matchdict['actor_id']
+
+  # Connect to the database and retrieve the actor
   db = mysql.connect(host=db_host, database=db_name, user=db_user, passwd=db_pass)
   cursor = db.cursor()
-  cursor.execute("select * from TestUsers where id='%s';" % the_id)
+  cursor.execute("select * from Actors where id='%s';" % the_id)
   record = cursor.fetchone()
   db.close()
 
@@ -60,15 +74,29 @@ def get_student(req):
 
   return response
 
+
 ''' Route Configurations '''
 if __name__ == '__main__':
   with Configurator() as config:
 
-    config.add_route('get_students', '/students')
-    config.add_view(get_students, route_name='get_students', renderer='json')
+    # to use Jinja2 to render the template!
+    config.include('pyramid_jinja2')
+    config.add_jinja2_renderer('.html')
 
-    config.add_route('get_student', '/student/{student_id}')
-    config.add_view(get_student, route_name='get_student', renderer='json')
+    # Home route
+    config.add_route('get_home', '/')
+    config.add_view(get_home, route_name='get_home')
+
+    # RESTful collection route
+    config.add_route('get_actors', '/actors')
+    config.add_view(get_actors, route_name='get_actors', renderer='json')
+
+    # RESTful instance route
+    config.add_route('get_actor', '/actor/{actor_id}')
+    config.add_view(get_actor, route_name='get_actor', renderer='json')
+
+    # For our static assets!
+    config.add_static_view(name='/', path='./public', cache_max_age=0)
 
     app = config.make_wsgi_app()
 

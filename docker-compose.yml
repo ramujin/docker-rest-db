@@ -9,20 +9,25 @@ services:
       ./credentials.env
     ports:
       - 3306:3306
+    command: --init-file /init-db.sql
     volumes:
-      - ./persistent_db:/var/lib/mysql  # persist when container is stopped!
-    container_name: 140a-mysql-db
+      - ./database/init-db.sql:/init-db.sql     # map the init-db.sql file into Docker
+      - ./database/persistent_db:/var/lib/mysql # persist even when container is stopped!
+    container_name: 140-db-server
 
-  rest-server:
+  web-server:
     build:
       context: ./server
     ports:
       - 6543:6543
+    command: python server.py
     env_file:
       ./credentials.env
     volumes:
       - ./server/src:/app
-    container_name: 140a-rest-server
+    container_name: 140-web-server
+    depends_on:
+      - mysql-server
 
 volumes:
   persistent_db:
