@@ -10,7 +10,7 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - ./persistent_db:/var/lib/mysql  # persist when container is stopped!
+      - ./persistent_db:/var/lib/mysql  # persists when container is stopped!
     container_name: 140a-mysql-db
 
   rest-server:
