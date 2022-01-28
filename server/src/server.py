@@ -1,6 +1,5 @@
 from wsgiref.simple_server import make_server
 from pyramid.config import Configurator
-from pyramid.response import Response
 from pyramid.renderers import render_to_response
 
 import mysql.connector as mysql
@@ -96,10 +95,10 @@ if __name__ == '__main__':
     config.add_view(get_actor, route_name='get_actor', renderer='json')
 
     # For our static assets!
-    config.add_static_view(name='/', path='./public', cache_max_age=0)
+    config.add_static_view(name='/', path='./public', cache_max_age=3600)
 
     app = config.make_wsgi_app()
 
-  server = make_server('0.0.0.0', 6543, app)
-  print('Web server started on: http://0.0.0.0:6543')
+  server = make_server('0.0.0.0', 80, app)
+  print('Web server started on: http://0.0.0.0 or http://127.0.0.1 or http://localhost')
   server.serve_forever()

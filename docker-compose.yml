@@ -19,8 +19,9 @@ services:
     build:
       context: ./server
     ports:
-      - 6543:6543
-    command: python server.py
+      - 80:80
+    # command: python server.py
+    command: tail -f /dev/null # just keep it running for debugging
     env_file:
       ./credentials.env
     volumes:

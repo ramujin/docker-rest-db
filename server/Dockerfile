@@ -7,14 +7,11 @@ ENV PYTHONUNBUFFERED 1
 # Define/create a working directory for the RUN/CMD/COPY commands
 WORKDIR /app
 
-# Copy the contents of the "src" folder to the container
-COPY ./src .
+# Copy the requirements.txt file into the container
+COPY ./src/requirements.txt .
 
 # Install the required dependencies
 RUN pip install -r requirements.txt
 
 # Tell Docker to listen to traffic on this port inside the container
-EXPOSE 6543
-
-# Start the Pyramid web server
-# CMD ["python", "server.py"]
+EXPOSE 80
