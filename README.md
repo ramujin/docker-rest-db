@@ -21,6 +21,8 @@
     exit
     ```
 
-4) Point your browser to one of the two defined routes (might be localhost on some machines):
+4) Point your browser to the webserver routes (might be ```http://localhost``` on some machines):
 
-    ```0.0.0.0:6543/students``` or ```0.0.0.0:6543/student/[some-id]```
+    * GET / Route: ```http://0.0.0.0```
+    * GET /actors Route: ```http://0.0.0.0/actors```
+    * GET /actor/[actor-id] Route: ```http://0.0.0.0/actor/[actor-id]```
