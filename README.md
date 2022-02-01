@@ -21,13 +21,21 @@
     pip3 install -r requirements.txt
     ```
 
-4) Run the server
+4) Source the environment variables into your path
+
+   ```bash
+   source credentials.env
+   ```
+
+   > NOTE: Windows users, I'm sorry your life is always harder. Please follow this guide to read environment variables into your path: <https://bennett4.medium.com/windows-alternative-to-source-env-for-setting-environment-variables-606be2a6d3e1>
+
+5) Run the server
 
     ```bash
     python3 server.py
     ```
 
-5) Point your browser to the webserver routes (might be ```http://localhost``` on some machines):
+6) Point your browser to the webserver routes (might be ```http://localhost``` on some machines):
 
     * GET / Route: ```http://0.0.0.0```
     * GET /actors Route: ```http://0.0.0.0/actors```
