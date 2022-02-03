@@ -44,6 +44,13 @@
 ### Docker-based Usage
 
 ---
+0) Create database credentials:
+    ```bash
+    echo "MYSQL_HOST=" > credentials.env
+    echo "MYSQL_USER=" >> credentials.env
+    echo "MYSQL_PASSWORD=" >> credentials.env
+    echo "MYSQL_DATABASE=" >> credentials.env
+    ```
 
 1) Run the following command to build the containers and start up both web server and database containers:
 
@@ -54,7 +61,7 @@
 2) In a new terminal window, open an interactive shell into the web server container and start the web server:
 
     ```bash
-    docker exec -it 140a-web-server bash
+    docker exec -it 140-web-server bash
     python server.py
     ```
 
