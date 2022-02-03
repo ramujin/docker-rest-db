@@ -18,5 +18,5 @@ INSERT INTO Actors (first_name, last_name, email, age, created_at) VALUES
   ("Zendaya", "", "zenny@greatestshowwoman.com", 25, CURRENT_TIMESTAMP),
   ("Tom", "Holland", "tom@ironmanrocks.com", 25, CURRENT_TIMESTAMP),
   ("Tobey", "Maguire", "tobey@originalspidey.com", 46, CURRENT_TIMESTAMP),
-  ("Andrew", "Garfield", "andy@garfbarf.com", 38, CURRENT_TIMESTAMP)
+  ("Andrew", "Garfield", "andy@theamazingspidey.com", 38, CURRENT_TIMESTAMP)
 ;
