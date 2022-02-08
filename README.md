@@ -1,5 +1,7 @@
 # An example of setting up a RESTful Pyramid Web Server that communicates with a MySQL database
 
+## This branch uses Javascript to inject content dynamically & RESTfully into the table.
+
 ## Usage Instructions
 
 ### Native Usage

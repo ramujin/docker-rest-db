@@ -4,7 +4,10 @@
     <meta charset="utf-8">
     <title>ECE 140A Rest DB</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
     <link rel="stylesheet" type="text/css" href="simple.css">
+    <script src="simple.js" defer></script>
   </head>
   <body>
 
@@ -17,18 +20,10 @@
         </tr>
       </thead>
       <tbody>
-        {# loop through the records and render them #}
-        {% for actor in actors %}
-          <tr>
-            <td>{{ actor[0] }}</td>
-            <td>{{ actor[1] }}</td>
-            <td>{{ actor[2] }}</td>
-            <td><a href="/actor/{{ actor[0] }}">{{ actor[3] }}</a></td>
-            <td>{{ actor[4] }}</td>
-          </tr>
-        {% endfor %}
+        <!-- Content will be dynamically injected with JS after page load -->
       </tbody>
     </table>
 
   </body>
+
 </html>

@@ -1,6 +1,6 @@
 from wsgiref.simple_server import make_server
 from pyramid.config import Configurator
-from pyramid.renderers import render_to_response
+from pyramid.response import FileResponse
 
 import mysql.connector as mysql
 import os
@@ -14,13 +14,7 @@ db_name = os.environ['MYSQL_DATABASE']
 
 ''' Normal Route for an HTML Page '''
 def get_home(req):
-  db = mysql.connect(host=db_host, database=db_name, user=db_user, passwd=db_pass)
-  cursor = db.cursor()
-  cursor.execute("select id, first_name, last_name, email, age from Actors;")
-  records = cursor.fetchall()
-  db.close()
-
-  return render_to_response('index.html', {"actors":records}, request=req)
+  return FileResponse('index.html')
 
 
 ''' Collection Route to GET Actors '''
@@ -77,10 +71,6 @@ def get_actor(req):
 ''' Route Configurations '''
 if __name__ == '__main__':
   with Configurator() as config:
-
-    # to use Jinja2 to render the template!
-    config.include('pyramid_jinja2')
-    config.add_jinja2_renderer('.html')
 
     # Home route
     config.add_route('get_home', '/')
