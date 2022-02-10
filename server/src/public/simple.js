@@ -1,9 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
 
-  // Global variables to hold the reference to the template row that we can clone
-  var theTemplate = document.querySelector('.template-row');
-  var theTable = document.querySelector("table tbody");
-
   // Helper function to inject a new row into the table
   function injectTableRow(actor) {
     let theTable = document.querySelector("table tbody");
